@@ -33,5 +33,5 @@ const CilentSchema = new Schema({
   clientPermissions: [ClientPermissionSchema],
   userPermission: UserPermissionSchema
 });
-
-module.exports.Client = mongoose.model('client', CilentSchema);
+const Client = mongoose.model('client', CilentSchema);
+module.exports = Client;

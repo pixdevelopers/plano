@@ -1,8 +1,8 @@
 import express from 'express';
-import profile from './profile';
+import client from './client';
 
 const router = express.Router();
 
-router.use('/profile', profile);
+router.use('/client', client);
 
 export default router;

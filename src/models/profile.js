@@ -15,9 +15,6 @@ module.exports.ProfileSchema = new Schema({
   },
   webSite: String,
   qrCode: String,
-  enableNotification: Boolean,
-  enableSendEmail: Boolean,
-  enableSendSMS: Boolean,
   description: String,
   createdAt: {
     type: Date,
