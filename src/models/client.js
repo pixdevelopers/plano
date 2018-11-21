@@ -33,5 +33,13 @@ const CilentSchema = new Schema({
   clientPermissions: [ClientPermissionSchema],
   userPermission: UserPermissionSchema
 });
+
+function validateClient(client) {
+  return Joi.validate(client, { name: Joi.string()
+      .max(50)
+      .required(), parentId: Joi.ObjectId().required() });
+}
+
 const Client = mongoose.model('client', CilentSchema);
 module.exports = Client;
+module.exports.validate = validateClient;

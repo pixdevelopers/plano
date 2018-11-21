@@ -5,6 +5,8 @@ const PollingSchema = new Schema({
   clientId: { type: ObjectIdSchema, ref: 'client' },
   title: String,
   choices: Array,
+  maxSelection: Number,
+  urlLink: String,
   description: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date

@@ -5,7 +5,7 @@ module.exports.ProfileSchema = new Schema({
   mobile: String,
   gender: String,
   calendarType: { type: String, default: 'en' },
-  template: String,
+  templateUI: String,
   background: String,
   isParkingAvailble: Boolean,
   address: String,
