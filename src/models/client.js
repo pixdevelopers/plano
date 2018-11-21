@@ -28,7 +28,7 @@ const CilentSchema = new Schema({
   plan: PlanClientSchema,
   profile: ProfileSchema,
   serviceLocations: [ServiceLocationSchema],
-  subscribs: [SubscribeSchema],
+  subscribes: [SubscribeSchema],
   ratings: [RatingSchema],
   clientPermissions: [ClientPermissionSchema],
   userPermission: UserPermissionSchema
