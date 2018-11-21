@@ -4,7 +4,6 @@ import { ReservationSchema } from './reservation';
 const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
 const ServiceSchema = new Schema({
-  serviceType: String,
   time: String,
   prePayment: Number,
   closeTime: String,
@@ -14,6 +13,7 @@ const ServiceSchema = new Schema({
   description: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
+  serviceTypeId: { type: ObjectIdSchema, ref: 'serviceType' },
   clientId: { type: ObjectIdSchema, ref: 'client' },
   calendarId: { type: ObjectIdSchema, ref: 'calendar' },
   location: { type: ObjectIdSchema, ref: 'client' },

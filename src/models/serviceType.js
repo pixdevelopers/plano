@@ -1,12 +1,14 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
-
-const subscribeSchema = new Schema({
+const ServiceTypeSchema = new Schema({
+  name: String,
+  price: Number,
+  duration: String,
+  description: String,
   clientId: { type: ObjectIdSchema, ref: 'client' },
-  subscriberId: { type: ObjectIdSchema, ref: 'client' },
-  showNotification: { type: Boolean, default: true },
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date
 });
-module.exports.Subscribe = mongoose.model('subscribe', subscribeSchema);
+
+module.exports.ServiceType = mongoose.model('serviceType', ServiceTypeSchema);
