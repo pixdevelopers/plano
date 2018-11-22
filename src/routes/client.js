@@ -17,7 +17,7 @@ router.put('/', async (req, res, next) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   const updatedAt = Date.now;
-  const result = await Client.findByIdAndUpdate(req.body._id, { name: req.body.name, updatedAt, userId=req.body._id }, { new: true });
+  const result = await Client.findByIdAndUpdate(req.body._id, { name: req.body.name, updatedAt, user=req.body._id }, { new: true });
 
   if (!result) return res.status(404).send('The client with the given ID was not found.');
 

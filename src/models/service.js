@@ -1,25 +1,38 @@
 import mongoose from 'mongoose';
 import { RatingSchema } from './rating';
 import { ReservationSchema } from './reservation';
+
 const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
-const ServiceSchema = new Schema({
-  time: String,
+const serviceSchema = new Schema({
+  date: Date,
+  startTime: String,
   prePayment: Number,
   closeTime: String,
   duration: String,
   needToConfirm: Boolean,
+  needToCall: Boolean,
   isCanceled: Boolean,
   description: String,
+  color: String,
+  reservation: ReservationSchema,
+  ratings: RatingSchema,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
-  serviceTypeId: { type: ObjectIdSchema, ref: 'serviceType' },
-  clientId: { type: ObjectIdSchema, ref: 'client' },
-  calendarId: { type: ObjectIdSchema, ref: 'calendar' },
+  serviceType: { type: ObjectIdSchema, ref: 'serviceType' },
+  client: { type: ObjectIdSchema, ref: 'client' },
+  scheduler: { type: ObjectIdSchema, ref: 'calendar' },
   location: { type: ObjectIdSchema, ref: 'client' },
-  questionId: { type: ObjectIdSchema, ref: 'serviceQuestion' },
-  reservation: ReservationSchema,
-  ratings: [RatingSchema]
+  question: { type: ObjectIdSchema, ref: 'serviceQuestion' }
 });
 
-module.exports.Service = mongoose.model('service', ServiceSchema);
+function validateService(service) {
+  return Joi.validate(service, {
+    time: Joi.string().required(),
+    client: Joi.ObjectId().required(),
+    serviceType: Joi.ObjectId().required()
+  });
+}
+
+module.exports.Service = mongoose.model('service', serviceSchema);
+module.exports.Validate = validateService;

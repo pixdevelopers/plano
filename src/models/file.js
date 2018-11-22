@@ -9,7 +9,7 @@ const FileSchema = new Schema({
   description: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
-  clientId: { type: ObjectIdSchema, ref: 'client' },
+  client: { type: ObjectIdSchema, ref: 'client' },
   serviceId: { type: ObjectIdSchema, ref: 'service' }
 });
 

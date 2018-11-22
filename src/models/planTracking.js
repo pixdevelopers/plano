@@ -10,8 +10,8 @@ const PlanTrackingSchema = new Schema({
   description: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
-  clientId: { type: ObjectIdSchema, ref: 'client' },
-  planId: { type: ObjectIdSchema, ref: 'plan' }
+  client: { type: ObjectIdSchema, ref: 'client' },
+  plan: { type: ObjectIdSchema, ref: 'plan' }
 });
 
 module.exports.PlanTracking = mongoose.model(

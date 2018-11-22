@@ -5,14 +5,14 @@ import { Subscribe } from '../models/subscribe';
 //Get all subscribers for current client
 router.get('/', async (req, res, next) => {
   const result = await Subscribe.find({ clientId: req.body._id })
-    .populate('subscriberId', 'name userName avatar')
-    .select('subscriberId');
+    .populate('subscriber', 'name userName avatar')
+    .select('subscriber');
   if (!result)
     return res.status(404).send('The client with the given ID was not found.');
   res.send({
-    userName: result.subscriberId.userName,
-    name: result.subscriberId.name,
-    avatar: result.subscriberId.avatar
+    userName: result.subscriber.userName,
+    name: result.subscriber.name,
+    avatar: result.subscriber.avatar
   });
 });
 //Get count of subscribers
@@ -26,8 +26,8 @@ router.get('/count/:id', async (req, res, next) => {
 //subscribe or unsubscribe
 router.put('/:id', async (req, res, next) => {
   let result = await Subscribe.findOne({
-    clientId: req.params.id,
-    subscriberId: req.body._id
+    client: req.params.id,
+    subscriber: req.body._id
   });
 
   if (result) {
@@ -35,7 +35,7 @@ router.put('/:id', async (req, res, next) => {
     return res.send('unsubscribing is done');
   }
 
-  const subscribe = new Subscribe({ clientId: req.params.id, subscriberId: req.body._id });
+  const subscribe = new Subscribe({ client: req.params.id, subscriber: req.body._id });
   await subscribe.save();
   res.send('subscribing is done');
 });
@@ -43,8 +43,8 @@ router.put('/:id', async (req, res, next) => {
 //notification on/off
 router.put('/notefication/:id', async (req, res, next) => {
   let result = await Subscribe.findOne({
-    clientId: req.params.id,
-    subscriberId: req.body._id
+    client: req.params.id,
+    subscriber: req.body._id
   });
   if (!result)
     return res.status(404).send('The client with the given ID was not found.');

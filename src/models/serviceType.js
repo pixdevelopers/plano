@@ -6,7 +6,7 @@ const ServiceTypeSchema = new Schema({
   price: Number,
   duration: String,
   description: String,
-  clientId: { type: ObjectIdSchema, ref: 'client' },
+  client: { type: ObjectIdSchema, ref: 'client' },
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date
 });

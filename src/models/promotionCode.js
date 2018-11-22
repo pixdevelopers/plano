@@ -3,8 +3,8 @@ const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
 
 const UsedPromotionSchema = new Schema({
-  userId: { type: ObjectIdSchema, ref: 'client' },
-  planId: { type: ObjectIdSchema, ref: 'plan' }
+  user: { type: ObjectIdSchema, ref: 'client' },
+  plan: { type: ObjectIdSchema, ref: 'plan' }
 });
 
 const PromitionByPlanSchema = new Schema({
@@ -13,8 +13,8 @@ const PromitionByPlanSchema = new Schema({
   description: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
-  clientId: { type: ObjectIdSchema, ref: 'client' },
-  planId: { type: ObjectIdSchema, ref: 'plan' }
+  client: { type: ObjectIdSchema, ref: 'client' },
+  plan: { type: ObjectIdSchema, ref: 'plan' }
 });
 
 const PromotionCodeSchema = new Schema({
@@ -24,7 +24,7 @@ const PromotionCodeSchema = new Schema({
   description: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
-  userId: { type: ObjectIdSchema, ref: 'client' },
+  user: { type: ObjectIdSchema, ref: 'client' },
   byPlan: [PromitionByPlanSchema],
   used: [UsedPromotionSchema]
 });

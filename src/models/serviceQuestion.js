@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const ServiceQuestionSchema = new Schema({
-  clientId: { type: ObjectIdSchema, ref: 'client' },
+  client: { type: ObjectIdSchema, ref: 'client' },
   name: String,
   questions: [QuestionSchema],
   createdAt: { type: Date, default: Date.now },

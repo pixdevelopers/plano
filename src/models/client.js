@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { RatingSchema } from './rating';
 import { ProfileSchema } from './profile';
-import { SubscribeSchema } from './subscribe';
 import { ServiceLocationSchema } from './serviceLocation';
 import { ClientPermissionSchema } from './clientPermisson';
 import { UserPermissionSchema } from './userPermisson';
@@ -9,7 +8,7 @@ const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
 const PlanClientSchema = new Schema({ any: {} }, { strict: false });
 const CilentSchema = new Schema({
-  parentId: { type: ObjectIdSchema, ref: 'client' },
+  parent: { type: ObjectIdSchema, ref: 'client' },
   code: String,
   name: String,
   userName: String,
@@ -23,8 +22,8 @@ const CilentSchema = new Schema({
   description: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
-  businessId: { type: ObjectIdSchema, ref: 'business' },
-  cityId: { type: ObjectIdSchema, ref: 'city' },
+  business: { type: ObjectIdSchema, ref: 'business' },
+  city: { type: ObjectIdSchema, ref: 'city' },
   plan: PlanClientSchema,
   profile: ProfileSchema,
   serviceLocations: [ServiceLocationSchema],
@@ -36,7 +35,9 @@ const CilentSchema = new Schema({
 function validateClient(client) {
   return Joi.validate(client, { name: Joi.string()
       .max(50)
-      .required(), parentId: Joi.ObjectId().required() });
+      .required(), 
+      business: Joi.ObjectId().required(),
+    city: Joi.ObjectId().required() });
 }
 
 const Client = mongoose.model('client', CilentSchema);

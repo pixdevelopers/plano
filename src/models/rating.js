@@ -3,8 +3,9 @@ const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
 
 const RatingSchema = new Schema({
-  clientId: { type: ObjectIdSchema, ref: 'client' },
+  client: { type: ObjectIdSchema, ref: 'client' },
   rank: Number,
+  comment:String,
   createdAt: { type: Date, default: Date.now }
 });
 

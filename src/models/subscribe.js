@@ -3,8 +3,8 @@ const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
 
 const subscribeSchema = new Schema({
-  clientId: { type: ObjectIdSchema, ref: 'client' },
-  subscriberId: { type: ObjectIdSchema, ref: 'client' },
+  client: { type: ObjectIdSchema, ref: 'client' },
+  subscriber: { type: ObjectIdSchema, ref: 'client' },
   showNotification: { type: Boolean, default: true },
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date

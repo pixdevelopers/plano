@@ -1,9 +1,9 @@
 import express from 'express';
 const router = express.Router();
-import { Business, validate } from '../models/business';
+import { Service, validate } from '../models/service';
 
-router.get('/', async (req, res, next) => {
-    const result = await Business.find();
+router.get('/day/:date', async (req, res, next) => {
+    const result = await Service.find({});
     res.send(result);
 });
 

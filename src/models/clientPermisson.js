@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
 module.exports.ClientPermissionSchema = new Schema({
-  clientId: { type: ObjectIdSchema, ref: 'client' },
+  client: { type: ObjectIdSchema, ref: 'client' },
   haveFullAccess: { type: Boolean, default: false },
   isEnable: { type: Boolean, default: true },
   permistion: Object,

@@ -13,7 +13,7 @@ const TransactionSchema = new Schema({
   description: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
-  clientId: { type: ObjectIdSchema, ref: 'client' }
+  client: { type: ObjectIdSchema, ref: 'client' }
 });
 
 module.exports.Transaction = mongoose.model('transaction', TransactionSchema);

@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const PollingAnswerSchema = new Schema({
-  clientId: { type: ObjectIdSchema, ref: 'client' },
-  pollingId: { type: ObjectIdSchema, ref: 'polling' },
+  client: { type: ObjectIdSchema, ref: 'client' },
+  polling: { type: ObjectIdSchema, ref: 'polling' },
   choiceIndex: [Number],
   clientName:String,
   description: String,

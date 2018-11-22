@@ -3,10 +3,10 @@ const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
 
 const BusinessSchema = new Schema({
-  parentId: { type: ObjectIdSchema, ref: 'business' },
+  parent: { type: ObjectIdSchema, ref: 'business' },
   name: String,
   needToConfirm: Boolean,
-  clientId: { type: ObjectIdSchema, ref: 'client' },
+  client: { type: ObjectIdSchema, ref: 'client' },
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date
 });
@@ -16,7 +16,7 @@ function validateBusiness(business) {
     name: Joi.string()
       .max(50)
       .required(),
-    parentId: Joi.ObjectId().required()
+    parent: Joi.ObjectId().required()
   });
 }
 
