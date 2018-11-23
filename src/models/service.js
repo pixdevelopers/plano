@@ -14,15 +14,14 @@ const serviceSchema = new Schema({
   needToCall: Boolean,
   isCanceled: Boolean,
   description: String,
-  color: String,
+  setting: Object,
   reservation: ReservationSchema,
   ratings: RatingSchema,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
   serviceType: { type: ObjectIdSchema, ref: 'serviceType' },
   client: { type: ObjectIdSchema, ref: 'client' },
-  scheduler: { type: ObjectIdSchema, ref: 'calendar' },
-  location: { type: ObjectIdSchema, ref: 'client' },
+  scheduler: { type: ObjectIdSchema, ref: 'scheduler' },
   question: { type: ObjectIdSchema, ref: 'serviceQuestion' }
 });
 

@@ -21,7 +21,7 @@ router.post('/', async (req, res, next) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    let city = new City({ name: req.body.name, country: req.body.countryId, user=req.body._id });
+    let city = new City({ name: req.body.params.name, country: req.body.params.countryId, user=req.body._id });
 
     city = await city.save();
 
@@ -32,7 +32,7 @@ router.put('/:id', async (req, res, next) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     const updatedAt = Date.now;
-    const result = await City.findByIdAndUpdate(req.params.id, { name: req.body.name, updatedAt, country: req.body.countryId,  user=req.body._id }, { new: true });
+    const result = await City.findByIdAndUpdate(req.params.id, { name: req.body.params.name, updatedAt, country: req.body.params.countryId,  user=req.body._id }, { new: true });
 
     if (!result) return res.status(404).send('The city with the given ID was not found.');
 

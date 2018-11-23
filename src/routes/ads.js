@@ -16,10 +16,10 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-    const { error } = validate(req.body);
+    const { error } = validate(req.body.params);
     if (error) return res.status(400).send(error.details[0].message);
     
-    const { title, adsURL, size, duration, pageLocation, linkToRedirect, description} =req.body;
+    const { title, adsURL, size, duration, pageLocation, linkToRedirect, description } = req.body.params;
 
     let ads = new Ads({ title, adsURL, size, duration, pageLocation, linkToRedirect, description, client=req.body._id});
 
@@ -32,7 +32,7 @@ router.put('/:id', async (req, res, next) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const { title, adsURL, size, duration, pageLocation, linkToRedirect, description } = req.body;
+    const { title, adsURL, size, duration, pageLocation, linkToRedirect, description } = req.body.params;
     const updatedAt = Date.now;
     const ads = await Ads.findByIdAndUpdate(req.params.id, 
         { title, adsURL, size, duration, pageLocation, linkToRedirect, isExpired, description, updatedAt }, { new: true });

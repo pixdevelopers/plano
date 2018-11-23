@@ -6,8 +6,9 @@ const ObjectIdSchema = Schema.ObjectId;
 const schedulerSchema = new Schema({
   start: Date,
   end: Date,
-  color: String,
+  setting: Object,
   event: String,
+  parent: { type: ObjectIdSchema, ref: 'client' },
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
   client: { type: ObjectIdSchema, ref: 'client' }

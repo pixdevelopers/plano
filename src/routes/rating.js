@@ -46,7 +46,7 @@ router.put('/service/:id', async (req, res, next) => {
   let service = await Service.findById(req.params.Id);
   const result = service.ratings.id(req.body._id);
   if (!result) return res.status(404).send('You have already rated');
-  const rate = new Rating({ client: req.body._id, rank: req.body.rank,comment:req.body.comment });
+    const rate = new Rating({ client: req.body._id, rank: req.body.params.rank, comment: req.body.params.comment });
     service.ratings.push(rate);
     service = await service.save();
   res.send('Your rating has been registered');

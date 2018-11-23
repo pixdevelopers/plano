@@ -1,14 +1,15 @@
 import express from 'express';
 const router = express.Router();
 import { Service, validate } from '../models/service';
+const _ = require('lodash');
 
-router.get('/day/:date', async (req, res, next) => {
-    const result = await Service.find({});
-    res.send(result);
-});
+// router.get('/day/:date', async (req, res, next) => {
+//     const result = await Service.find({});
+//     res.send(result);
+// });
 
 router.get('/:id', async (req, res, next) => {
-    const result = await Business.findById(req.params.id);
+    const result = await Service.findById(req.params.id);
     if (!result) return res
         .status(404)
         .send(
@@ -18,29 +19,35 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-    const { error } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (Array.isArray(req.body.params)) {
+        
+        req.body.params.forEach(srv => {
+            let service = new Service(_.cloneDeep(srv));
+            service = await service.save();
+        });
 
-    let business = new Business({ name: req.body.name, user=req.body._id });
+    } else {
+        const { error } = validate(req.body.params);
+        if (error) return res.status(400).send(error.details[0].message);
+        res.send(service);
+    }
 
-    business = await business.save();
-
-    res.send(business);
 });
 
 router.put('/:id', async (req, res, next) => {
-    const { error } = validate(req.body);
+    const { error } = validate(req.body.params);
     if (error) return res.status(400).send(error.details[0].message);
-    const updatedAt = Date.now;
-    const result = await Business.findByIdAndUpdate(req.params.id, { name: req.body.name, updatedAt, user=req.body._id }, { new: true });
+     let service= await Service.findById(req.params.id);
+    if (!result) return res.status(404).send('The service with the given ID was not found.');
+    service = _.cloneDeep(req.body.params);
+    service.updatedAt = Date.now;
+    service = await service.save();
 
-    if (!result) return res.status(404).send('The business with the given ID was not found.');
-
-    res.send(result);
+    res.send(service);
 });
 
 router.delete('/:id', async (req, res, next) => {
-    const result = await Business.findByIdAndRemove(req.params.id);
+    const result = await Service.findByIdAndRemove(req.params.id);
     if (!result) return res.status(404).send('The business with the given ID was not found.');
     res.send(result);
 });
