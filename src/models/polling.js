@@ -6,7 +6,11 @@ const PollingSchema = new Schema({
   title: String,
   choices: Array,
   maxSelection: Number,
+  isClosed:{type:Boolean,default:false},
   urlLink: String,
+  isPublic:Boolean,
+  confirm:String,
+  isPrivate:{type:Boolean,default:false},
   description: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date
