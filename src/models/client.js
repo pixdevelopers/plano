@@ -11,7 +11,7 @@ const CilentSchema = new Schema({
   parent: { type: ObjectIdSchema, ref: 'client' },
   code: String,
   name: String,
-  userName: String,
+  userName: {type:String,unique:true},
   email: String,
   password: { type: String, maxLength: 1024 },
   avatar: String,

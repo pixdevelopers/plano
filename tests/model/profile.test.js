@@ -6,7 +6,7 @@ describe('/client', () => {
     server = require('../../src/server');
   });
   afterEach(() => {
-    //server.close();
+    server.close();
   });
   describe('Get /', () => {
     it('Should return all clients', async done => {
