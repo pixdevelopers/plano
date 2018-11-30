@@ -3,13 +3,13 @@ require('express-async-errors');
 import error from './middlewares/error';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
+//import dotenv from 'dotenv';
 
 //import helmet from 'helmet';
 //import checkJwt from './middlewares/jwt';
 import routes from './routes/routes';
-
-dotenv.load();
+process.env.NODE_CONFIG_DIR = './src/config';
+//dotenv.load();
 const app = express();
 require('./startup/db')();
 //app.use(helmet());

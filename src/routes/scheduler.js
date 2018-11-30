@@ -11,7 +11,7 @@ router.get('/:id/:start/:end', async (req, res, next) => {
 });
 
 router.get('/:id', async (req, res, next) => {
-    const result = await Scheduler.findById(req.params.id);
+    let result = await Scheduler.findById(req.params.id);
     if (!result) return res
         .status(404)
         .send(

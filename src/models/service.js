@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import { RatingSchema } from './rating';
 import { ReservationSchema } from './reservation';
-
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
 const serviceSchema = new Schema({
@@ -28,8 +29,8 @@ const serviceSchema = new Schema({
 function validateService(service) {
   return Joi.validate(service, {
     time: Joi.string().required(),
-    client: Joi.ObjectId().required(),
-    serviceType: Joi.ObjectId().required()
+    client: Joi.objectId().required(),
+    serviceType: Joi.objectId().required()
   });
 }
 

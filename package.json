@@ -9,6 +9,11 @@
     "build": "babel src -d dist",
     "serve": "node dist/server.js"
   },
+  "jest": {
+    "transform": {
+      "\\.js$": "<rootDir>/node_modules/babel-jest"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pixdevelopers/plano.git"
@@ -29,6 +34,7 @@
     "express": "^4.16.4",
     "express-async-errors": "^3.1.1",
     "joi": "^14.0.0",
+    "joi-objectid": "^2.0.0",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
@@ -38,12 +44,13 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",
     "jest": "^23.6.0",
-    "mocha": "^5.2.0",
     "nodemon": "^1.18.4",
     "supertest": "^3.3.0"
   }

@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 
 const BusinessSchema = new Schema({
   parent: { type: ObjectIdSchema, ref: 'business' },
@@ -16,7 +18,7 @@ function validateBusiness(business) {
     name: Joi.string()
       .max(50)
       .required(),
-    parent: Joi.ObjectId().required()
+    parent: Joi.objectId().required()
   });
 }
 

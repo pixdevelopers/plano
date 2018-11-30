@@ -21,7 +21,7 @@ router.post('/', async (req, res, next) => {
     const { error } = validate(req.body.params);
     if (error) return res.status(400).send(error.details[0].message);
 
-    let business = new Business({ name: req.body.params.name, user=req.body._id });
+    let business = new Business({ name: req.body.params.name, client:req.body._id });
 
     business = await business.save();
 
@@ -32,7 +32,7 @@ router.put('/:id', async (req, res, next) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     const updatedAt = Date.now;
-    const result = await Business.findByIdAndUpdate(req.params.id, { name: req.body.params.name, updatedAt, user=req.body._id }, { new: true });
+    const result = await Business.findByIdAndUpdate(req.params.id, { name: req.body.params.name, updatedAt: updatedAt, client: req.body._id }, { new: true });
 
     if (!result) return res.status(404).send('The business with the given ID was not found.');
 

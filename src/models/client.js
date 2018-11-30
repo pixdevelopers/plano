@@ -6,6 +6,8 @@ import { ClientPermissionSchema } from './clientPermisson';
 import { UserPermissionSchema } from './userPermisson';
 const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const PlanClientSchema = new Schema({ any: {} }, { strict: false });
 const CilentSchema = new Schema({
   parent: { type: ObjectIdSchema, ref: 'client' },
@@ -36,8 +38,8 @@ function validateClient(client) {
   return Joi.validate(client, { name: Joi.string()
       .max(50)
       .required(), 
-      business: Joi.ObjectId().required(),
-    city: Joi.ObjectId().required() });
+      business: Joi.objectId().required(),
+    city: Joi.objectId().required() });
 }
 
 const Client = mongoose.model('client', CilentSchema);
