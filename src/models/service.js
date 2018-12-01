@@ -18,6 +18,7 @@ const serviceSchema = new Schema({
   setting: Object,
   reservation: ReservationSchema,
   ratings: RatingSchema,
+  notify:Boolean,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
   serviceType: { type: ObjectIdSchema, ref: 'serviceType' },

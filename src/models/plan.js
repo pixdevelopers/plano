@@ -14,6 +14,7 @@ const PlanSchema = new Schema({
   branding: Boolean,
   includAds: Boolean,
   calendarSync: Boolean,
+  serviceNotify: Boolean,
   remindByEmail: Boolean,
   remindBySMS: Boolean,
   countOfPhotosInGallery: Number,
