@@ -1,6 +1,9 @@
 import express from 'express';
 const router = express.Router();
 import Client from '../models/client';
+import bcrypt from 'bcrypt';
+import _ from 'lodash';
+
 import ServiceType from '../models/serviceType';
 router.get('/public/:code', async (req, res, next) => {
   const client = await Client.findOne({ code: req.params.code }).select(
@@ -25,6 +28,24 @@ router.get('/', async (req, res, next) => {
     return res.status(404).send('The client with the given ID was not found.');
   res.send(result);
 });
+
+router.post('/', async (req, res, next) => {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  
+  let client = await Client.findOne({ userName: req.body.userName });
+
+  if (client) return res.status(400).send('User already registered.');
+
+  client = new Client(_.pick(req.body, ['name', 'userName', 'password', 'businessId','cityId']));
+
+  const salt = await bcrypt.genSalt(10);
+  client.password= await bcrypt.hash(client.password,salt);
+
+  await client.save();
+  res.send(_.pick(client, ['_id','name','userName']));
+});
+
 
 router.put('/', async (req, res, next) => {
   const { error } = validate(req.body);

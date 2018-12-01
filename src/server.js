@@ -3,12 +3,16 @@ require('express-async-errors');
 import error from './middlewares/error';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-//import dotenv from 'dotenv';
+import config from 'config';
 
 //import helmet from 'helmet';
 //import checkJwt from './middlewares/jwt';
 import routes from './routes/routes';
-process.env.NODE_CONFIG_DIR = './src/config';
+//process.env.NODE_CONFIG_DIR = './src/config';
+if (!config.get('jwtPrivateKey')) {
+  console.error('FATAL ERROR: jwtPrivateKey is not defined');
+  //process.exit(1);
+}
 //dotenv.load();
 const app = express();
 require('./startup/db')();
@@ -27,6 +31,5 @@ const server = app.listen(process.env.PORT || 3000, () => {
 });
 
 module.exports = server;
-
 
 //NODE_ENVE=test
