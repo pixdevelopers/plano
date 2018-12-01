@@ -17,7 +17,7 @@ const serviceSchema = new Schema({
   description: String,
   setting: Object,
   reservation: ReservationSchema,
-  ratings: RatingSchema,
+  rating: RatingSchema,
   notify:Boolean,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
