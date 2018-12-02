@@ -4,6 +4,8 @@ import { ProfileSchema } from './profile';
 import { ServiceLocationSchema } from './serviceLocation';
 import { ClientPermissionSchema } from './clientPermisson';
 import { UserPermissionSchema } from './userPermisson';
+import jwt from 'jsonwebtoken';
+import config from 'config';
 const { Schema } = mongoose;
 const ObjectIdSchema = Schema.ObjectId;
 const Joi = require('joi');
@@ -13,8 +15,9 @@ const CilentSchema = new Schema({
   parent: { type: ObjectIdSchema, ref: 'client' },
   code: String,
   name: String,
-  userName: {type:String,unique:true},
+  userName: { type: String, unique: true },
   email: String,
+  mobile: String,
   password: { type: String, maxLength: 1024 },
   avatar: String,
   wallet: Number,
@@ -33,13 +36,19 @@ const CilentSchema = new Schema({
   clientPermissions: [ClientPermissionSchema],
   userPermission: UserPermissionSchema
 });
+CilentSchema.methods.generateAuthToken = function() {
+  const token = jwt.sign({ _id: this._id }, config.get('jwtPrivateKey'));
+  return token;
+};
 
 function validateClient(client) {
-  return Joi.validate(client, { name: Joi.string()
+  return Joi.validate(client, {
+    name: Joi.string()
       .max(50)
-      .required(), 
-      business: Joi.objectId().required(),
-    city: Joi.objectId().required() });
+      .required(),
+    business: Joi.objectId().required(),
+    city: Joi.objectId().required()
+  });
 }
 
 const Client = mongoose.model('client', CilentSchema);

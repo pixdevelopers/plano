@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
     const { error } = validate(req.body.params);
     if (error) return res.status(400).send(error.details[0].message);
     let plan = new Plan(_.cloneDeep(req.body.params));
-    plan.client=req.body._id;
+    plan.client = req.client._id;
     plan = await plan.save();
     res.send(plan);
 });

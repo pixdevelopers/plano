@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 module.exports.ProfileSchema = new Schema({
-  mobile: String,
+  phones: [String],
   gender: String,
   calendarType: { type: String, default: 'en' },
   templateUI: String,

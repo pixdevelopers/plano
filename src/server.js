@@ -11,7 +11,7 @@ import routes from './routes/routes';
 //process.env.NODE_CONFIG_DIR = './src/config';
 if (!config.get('jwtPrivateKey')) {
   console.error('FATAL ERROR: jwtPrivateKey is not defined');
-  //process.exit(1);
+  process.exit(1);
 }
 //dotenv.load();
 const app = express();

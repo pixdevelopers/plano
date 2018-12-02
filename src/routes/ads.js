@@ -21,7 +21,7 @@ router.post('/', async (req, res, next) => {
     
     const { title, adsURL, size, duration, pageLocation, linkToRedirect, description } = req.body.params;
 
-    let ads = new Ads({ title, adsURL, size, duration, pageLocation, linkToRedirect, description, client:req.body._id});
+    let ads = new Ads({ title, adsURL, size, duration, pageLocation, linkToRedirect, description, client: req.client._id});
 
     ads = await ads.save();
 

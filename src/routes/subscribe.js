@@ -27,7 +27,7 @@ router.get('/count/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   let result = await Subscribe.findOne({
     client: req.params.id,
-    subscriber: req.body._id
+    subscriber: req.client._id
   });
 
   if (result) {
@@ -44,7 +44,7 @@ router.put('/:id', async (req, res, next) => {
 router.put('/notefication/:id', async (req, res, next) => {
   let result = await Subscribe.findOne({
     client: req.params.id,
-    subscriber: req.body._id
+    subscriber: req.client._id
   });
   if (!result)
     return res.status(404).send('The client with the given ID was not found.');
