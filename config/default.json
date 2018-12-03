@@ -1,5 +1,12 @@
 {
   "jwtPrivateKey": "",
   "db" : "mongodb://localhost/plano",
-  "userNameType":"email"
+  "userNameType":"email",
+  "mail":{
+    "service":"support@plano.com",
+    "auth":{
+      "user":"",
+      "password":""
+    }
+  }
 }

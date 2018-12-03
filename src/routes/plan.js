@@ -46,7 +46,7 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
     const result = await Plan.findByIdAndRemove(req.params.id);
-    if (!result) return res.status(404).send('The business with the given ID was not found.');
+    if (!result) return res.status(404).send('The plan with the given ID was not found.');
     res.send(result);
 });
 
