@@ -1,3 +1,4 @@
 {
-    "jwtPrivateKey": "plano_jwtPrivateKey"
+    "jwtPrivateKey": "plano_jwtPrivateKey",
+    "mailApiKey": "apiKey"
 }

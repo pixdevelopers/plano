@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
-
-const PollingAnswerSchema = new Schema({
+import { ServiceLocationSchema } from './pollingVoteGroup';
+const PollingVoteSchema = new Schema({
   client: { type: ObjectIdSchema, ref: 'client' },
   polling: { type: ObjectIdSchema, ref: 'polling' },
   choiceIndex: [Number],
@@ -11,7 +11,7 @@ const PollingAnswerSchema = new Schema({
   updatedAt: Date
 });
 
-module.exports.PollingAnswer = mongoose.model(
-  'pollingAnswer',
-  PollingAnswerSchema
+module.exports.PollingVote = mongoose.model(
+  'pollingVote',
+  PollingVoteSchema
 );
