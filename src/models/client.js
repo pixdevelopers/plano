@@ -27,6 +27,8 @@ const CilentSchema = new Schema({
   description: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
+  token:String,
+  tokenExpire:Date,
   business: { type: ObjectIdSchema, ref: 'business' },
   city: { type: ObjectIdSchema, ref: 'city' },
   plan: PlanClientSchema,
