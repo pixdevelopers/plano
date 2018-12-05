@@ -12,7 +12,6 @@ const TransactionSchema = new Schema({
   paymentSystem: String,
   description: String,
   createdAt: { type: Date, default: Date.now },
-  updatedAt: Date,
   client: { type: ObjectIdSchema, ref: 'client' }
 });
 
