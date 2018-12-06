@@ -3,7 +3,29 @@ const router = express.Router();
 import Client from '../models/client';
 import bcrypt from 'bcrypt';
 import _ from 'lodash';
+import multer from 'multer';
 import { sendEmailRegistration } from '../util/email';
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/avatar/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now().toString());
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' ||
+    file.mimetype === 'image/jpeg') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+var upload = multer({ storage: storage, fileFilter: fileFilter });
+
+
 router.get('/', async (req, res, next) => {
   const result = await Client.findById(req.client._id);
   if (!result)
@@ -38,14 +60,16 @@ router.post('/', async (req, res, next) => {
     .send(_.pick(client, ['_id', 'name', 'userName']));
 });
 
-router.put('/', async (req, res, next) => {
+router.put('/', upload.single('avatar'), async (req, res, next) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   const client = await Client.findById(req.client._id);
   if (!client)
     return res.status(404).send('The client with the given ID was not found.');
-  client.set(req.body.params);
+  const clnt=_.omit(req.body.params,'file');
+  if (req.body.params.file) clnt.avatar = req.body.params.file;  
+  client.set(clnt);
   client.updatedAt = Date.now;
   await client.save();
   res.send(client);
