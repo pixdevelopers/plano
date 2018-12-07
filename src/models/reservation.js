@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 module.exports.ReservationSchema = new Schema({
-  isConfirmed: Boolean,
-  isGroup: Boolean,
-  countInGroup: Number,
+  name: String,
+  mobile: Number,
   reservingStatus: String,
-  hasAttachment: Boolean,
+  attachments: Array,
   description: String,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date

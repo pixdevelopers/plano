@@ -8,6 +8,7 @@ module.exports.ProfileSchema = new Schema({
   templateUI: String,
   background: String,
   isParkingAvailble: Boolean,
+  gallery:Array,
   address: String,
   location: {
     type: { type: String, default: 'Point' },

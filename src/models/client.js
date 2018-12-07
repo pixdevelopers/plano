@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 import { RatingSchema } from './rating';
 import { ProfileSchema } from './profile';
 import { ServiceLocationSchema } from './serviceLocation';
-import { ClientPermissionSchema } from './clientPermisson';
-import { UserPermissionSchema } from './userPermisson';
+import { ClientPermissionSchema } from './clientPermission';
+import { UserPermissionSchema } from './userPermission';
 import jwt from 'jsonwebtoken';
 import config from 'config';
 const { Schema } = mongoose;
@@ -13,16 +13,15 @@ Joi.objectId = require('joi-objectid')(Joi);
 const PlanClientSchema = new Schema({ any: {} }, { strict: false });
 const CilentSchema = new Schema({
   parent: { type: ObjectIdSchema, ref: 'client' },
+  userName: { type: String, unique: true },
   code: String,
   name: String,
-  userName: { type: String, unique: true},
   email: String,
   mobile: String,
   password: { type: String, maxLength: 1024 },
   avatar: String,
   wallet: Number,
   isLocked: Boolean,
-  isSystemUser: Boolean,
   isSharedPlan: Boolean,
   description: String,
   createdAt: { type: Date, default: Date.now },

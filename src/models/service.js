@@ -8,8 +8,8 @@ const ObjectIdSchema = Schema.ObjectId;
 const serviceSchema = new Schema({
   date: Date,
   startTime: String,
-  prePayment: Number,
   closeTime: String,
+  prePayment: Number,
   duration: String,
   needToConfirm: Boolean,
   needToCall: Boolean,
@@ -18,7 +18,7 @@ const serviceSchema = new Schema({
   setting: Object,
   reservation: ReservationSchema,
   rating: RatingSchema,
-  notify:Boolean,
+  notify: Boolean,
   createdAt: { type: Date, default: Date.now },
   updatedAt: Date,
   serviceType: { type: ObjectIdSchema, ref: 'serviceType' },
