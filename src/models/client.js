@@ -38,7 +38,9 @@ const CilentSchema = new Schema({
   userPermission: UserPermissionSchema
 });
 CilentSchema.methods.generateAuthToken = function() {
-  const token = jwt.sign({ _id: this._id }, config.get('jwtPrivateKey'));
+  const isStaff=!!this.userPermission;
+  const isClient =!!this.clientPermissions;
+  const token = jwt.sign({ _id: this._id,isStaff:isStaff,isClient:isClient }, config.get('jwtPrivateKey'));
   return token;
 };
 

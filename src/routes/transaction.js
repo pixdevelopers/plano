@@ -6,7 +6,7 @@ import { Transaction } from '../models/transaction';
 
 //Get all transactions for client
 router.get('/me', async (req, res, next) => {
-    const result = await Transaction.find({client:req.client._id});
+    const result = await Transaction.find({client:req.user._id});
     if (!result) return res.status(404).send('Not found.' );
     res.send(result);
 });

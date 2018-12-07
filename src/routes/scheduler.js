@@ -25,7 +25,7 @@ router.post('/', async (req, res, next) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     let scheduler = new Scheduler(_.cloneDeep(req.body.params));
-    scheduler.client = req.client._id;
+    scheduler.client = req.user._id;
     scheduler = await scheduler.save();
 
     res.send(scheduler);

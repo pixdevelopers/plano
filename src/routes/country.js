@@ -21,7 +21,7 @@ router.post('/', async (req, res, next) => {
     const { error } = validate(req.body.params);
     if (error) return res.status(400).send(error.details[0].message);
 
-    let country = new Country({ name: req.body.params.name, client: req.client._id });
+    let country = new Country({ name: req.body.params.name, client: req.user._id });
 
     country = await country.save();
 
@@ -32,7 +32,7 @@ router.put('/:id', async (req, res, next) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     const updatedAt = Date.now;
-    const result = await Country.findByIdAndUpdate(req.params.id, { name: req.body.params.name, updatedAt, client: req.client._id }, { new: true });
+    const result = await Country.findByIdAndUpdate(req.params.id, { name: req.body.params.name, updatedAt, client: req.user._id }, { new: true });
 
     if (!result) return res.status(404).send('The country with the given ID was not found.');
 

@@ -27,7 +27,7 @@ var upload = multer({ storage: storage, fileFilter: fileFilter });
 
 
 router.get('/', async (req, res, next) => {
-  const result = await Client.findById(req.client._id);
+  const result = await Client.findById(req.user._id);
   if (!result)
     return res.status(404).send('The client with the given ID was not found.');
   res.send(result);
@@ -64,7 +64,7 @@ router.put('/', upload.single('avatar'), async (req, res, next) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const client = await Client.findById(req.client._id);
+  const client = await Client.findById(req.user._id);
   if (!client)
     return res.status(404).send('The client with the given ID was not found.');
   const clnt=_.omit(req.body.params,'file');
@@ -75,8 +75,8 @@ router.put('/', upload.single('avatar'), async (req, res, next) => {
   res.send(client);
 });
 
-router.delete('/', async (req, res, next) => {
-  const result = await Client.findByIdAndRemove(req.client._id);
+router.delete('/:id', async (req, res, next) => {
+  const result = await Client.findByIdAndRemove(req.params.id);
   if (!result)
     return res.status(404).send('The client with the given ID was not found.');
   res.send(result);

@@ -7,7 +7,7 @@ import { Rating } from '../models/rating';
 
 //Get all clients that rated for current client profile
 router.get('/profile', async (req, res, next) => {
-    const result = await Client.findById(req.body._id)
+    const result = await Client.findById(req.user._id)
         .populate('ratings.client','name userName avatar')
         .select('ratings.rank ratings.client');
     if (!result) return res
@@ -32,12 +32,12 @@ router.get('/service/:id', async (req, res, next) => {
 
 router.put('/profile', async (req, res, next) => {
     let client = await Client.findById(req.body.clientId);
-    const result = client.ratings.id(req.client._id);
+    const result = client.ratings.id(req.user._id);
     if (!result) return res
         .status(404)
         .send('You have already rated');
     const rate = new Rating({
-      client: req.client._id,
+      client: req.user._id,
       rank: req.body.rank
     });
     client.ratings.push(rate);
@@ -47,7 +47,7 @@ router.put('/profile', async (req, res, next) => {
 
 router.put('/service/:id', async (req, res, next) => {
   let service = await Service.findById(req.params.Id);
-    const result = service.ratings.id(req.client._id);
+    const result = service.ratings.id(req.user._id);
   if (!result) return res.status(404).send('You have already rated');
     const rate = new Rating({ client: req.body._id, rank: req.body.params.rank, comment: req.body.params.comment });
     service.ratings.push(rate);
