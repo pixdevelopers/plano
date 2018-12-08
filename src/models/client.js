@@ -13,7 +13,7 @@ Joi.objectId = require('joi-objectid')(Joi);
 const PlanClientSchema = new Schema({ any: {} }, { strict: false });
 const CilentSchema = new Schema({
   parent: { type: ObjectIdSchema, ref: 'client' },
-  userName: { type: String, unique: true },
+  userName: { type: String,lowercase:true, unique: true },
   code: String,
   name: String,
   email: String,
